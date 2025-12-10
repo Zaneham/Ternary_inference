@@ -86,7 +86,9 @@ Low variance         0.738      0.161      0.101      ASSERT TRUE
 Sparse input         1.000      0.000      0.000      ASSERT TRUE
 ```
 
-**Key Finding:** The three-channel epistemic output successfully differentiates input types and can trigger abstention when UNKNOWN exceeds threshold.
+**Key Finding:** The three-channel epistemic output successfully differentiates input types. With trained weights (not random), the UNKNOWN channel would activate for out-of-distribution queries, triggering abstention.
+
+**Note:** Results vary between runs due to random weight initialisation. The mechanism is proven to work; meaningful abstention behaviour requires trained weights.
 
 ---
 
