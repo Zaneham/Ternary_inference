@@ -65,6 +65,33 @@ output = model.generate(input_ids, max_new_tokens=50)
 print(output)
 ```
 
+## Using Ollama Models (Optional)
+
+Load pre-trained weights from Ollama and quantise to ternary:
+
+```bash
+# First, install Ollama and download a model
+# https://ollama.ai/download
+ollama pull llama2
+
+# Install the GGUF library
+pip install gguf
+
+# Run the demo
+python demo_ollama.py
+```
+
+```python
+# Or load programmatically
+from model.ollama_loader import OllamaLoader
+
+loader = OllamaLoader()
+loader.list_models()  # Show available models
+weights = loader.load_model("smallest")  # Load and quantise
+```
+
+**Note:** The current implementation demonstrates weight loading and quantisation. Full weight integration (matching architectures, loading each layer) is a work in progress.
+
 ## Run Benchmarks
 
 ```bash
