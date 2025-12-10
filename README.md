@@ -108,6 +108,8 @@ python benchmark/comprehensive_benchmark.py
 - PASS - Sparsity-Uncertainty Correlation
 - PASS - Epistemic Output Layer
 
+**Note:** These benchmarks test the epistemic *mechanism* with random weights. They prove the architecture can express uncertainty, but real hallucination reduction requires trained weights and external validation (TruthfulQA, HaluEval, etc.).
+
 ---
 
 ## For a 7B Parameter Model
