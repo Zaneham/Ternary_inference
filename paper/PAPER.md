@@ -2,9 +2,7 @@
 
 **Zane Hambly**
 
-The Ian Index
-
-December 2024
+December 2025
 
 ---
 
@@ -329,7 +327,21 @@ We release our implementation as open source and invite the community to explore
 
 ## Acknowledgments
 
-This work builds on the pioneering research of Nikolay Brusentsov and the Setun development team at Moscow State University. We also acknowledge Kateryna Yushchenko, whose work on indirect addressing (pointers) predates and inspired modern computational paradigms.
+This work stands on the shoulders of giants—many of whom history has overlooked.
+
+**Nikolay Brusentsov** and the Setun development team at Moscow State University, whose balanced ternary computer (1958) proved that alternative computational paradigms could outperform binary in reliability and elegance. The Setun ran for 17 years while its Western counterparts required constant maintenance.
+
+**Kateryna Yushchenko** (1919-2001), Ukrainian computer scientist who invented pointers (indirect addressing) in 1955—nine years before they were "discovered" in the West. Her Address Programming Language was used across the Soviet Union for ballistic calculations and space exploration. Expelled from university as a "daughter of enemies of the people," she persevered to become the first woman in the USSR to receive a PhD in programming.
+
+**Grace Hopper** (1906-1992), who invented the first compiler and proved that computers could be programmed in human-readable languages. Her work on COBOL democratized programming and her philosophy—"It's easier to ask forgiveness than permission"—drives innovation to this day.
+
+**Sister Mary Kenneth Keller** (1913-1985), the first woman in America to earn a PhD in Computer Science (1965). A Catholic nun who helped develop BASIC, she believed computers should be accessible to everyone, not just mathematicians and engineers. She founded the computer science department at Clarke College and spent her career making computing education available to all.
+
+**The Archivists and Historians** who preserved the technical documentation, photographs, and memories of these pioneers. Without the tireless work of institutions like the Computer History Museum, the Charles Babbage Institute, and countless university archives, this knowledge would have been lost. Special recognition to those who translated Soviet-era technical papers and maintained access to research that political barriers might have buried.
+
+**The Open Source Community**, whose ethos of sharing knowledge freely echoes the collaborative spirit of early computing, when scientists shared code on punch cards and progress mattered more than profit.
+
+We release this work in that same spirit. The ideas here are not ours alone—they belong to everyone who dared to imagine that computers could work differently.
 
 ---
 
@@ -339,4 +351,4 @@ Full implementation available at: https://github.com/Zaneham/ternary-inference
 
 ---
 
-*Correspondence: Zane Hambly, The Ian Index*
+*Correspondence: Zane Hambly,*
