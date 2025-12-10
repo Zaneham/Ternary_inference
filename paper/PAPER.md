@@ -18,7 +18,7 @@ Applied to transformer architectures ranging from 1B to 120B parameters, we demo
 - 87-92% signal preservation compared to float32 baselines
 - 67% operational sparsity (zero-weight skip)
 
-All benchmarks pass for mathematical equivalence, numerical stability, output diversity, and reproducibility. The method requires no specialized hardware—standard CPUs can execute the addition/subtraction operations efficiently.
+All benchmarks pass for mathematical equivalence, numerical stability, output diversity, and reproducibility. The method requires no specialised hardware. Standard CPUs can execute the addition/subtraction operations efficiently.
 
 We open-source the full implementation and argue that the AI industry's dependence on GPU-based matrix multiplication represents a local optimum obscuring more efficient computational paradigms known since 1965.
 
@@ -305,7 +305,7 @@ We have demonstrated that transformer inference can be performed using only addi
 
 All benchmarks pass for mathematical equivalence, numerical stability, and output quality.
 
-The balanced ternary number system, developed by Brusentsov in 1958, offers a fundamentally different approach to neural network computation—one that the AI industry has overlooked for 60 years.
+The balanced ternary number system, developed by Brusentsov in 1958, offers a fundamentally different approach to neural network computation, one that the AI industry has overlooked for 60 years.
 
 We release our implementation as open source and invite the community to explore this alternative computational paradigm.
 
@@ -327,13 +327,13 @@ We release our implementation as open source and invite the community to explore
 
 ## Acknowledgments
 
-This work stands on the shoulders of giants—many of whom history has overlooked.
+This work stands on the shoulders of giants, many of whom history has overlooked.
 
 **Nikolay Brusentsov** and the Setun development team at Moscow State University, whose balanced ternary computer (1958) proved that alternative computational paradigms could outperform binary in reliability and elegance. The Setun ran for 17 years while its Western counterparts required constant maintenance.
 
-**Kateryna Yushchenko** (1919-2001), Ukrainian computer scientist who invented pointers (indirect addressing) in 1955—nine years before they were "discovered" in the West. Her Address Programming Language was used across the Soviet Union for ballistic calculations and space exploration. Expelled from university as a "daughter of enemies of the people," she persevered to become the first woman in the USSR to receive a PhD in programming.
+**Kateryna Yushchenko** (1919-2001), Ukrainian computer scientist who invented pointers (indirect addressing) in 1955, nine years before they were "discovered" in the West. Her Address Programming Language was used across the Soviet Union for ballistic calculations and space exploration. Expelled from university as a "daughter of enemies of the people," she persevered to become the first woman in the USSR to receive a PhD in programming.
 
-**Grace Hopper** (1906-1992), who invented the first compiler and proved that computers could be programmed in human-readable languages. Her work on COBOL democratized programming and her philosophy—"It's easier to ask forgiveness than permission"—drives innovation to this day.
+**Grace Hopper** (1906-1992), who invented the first compiler and proved that computers could be programmed in human-readable languages. Her work on COBOL democratised programming and her philosophy ("It's easier to ask forgiveness than permission") drives innovation to this day.
 
 **Sister Mary Kenneth Keller** (1913-1985), the first woman in America to earn a PhD in Computer Science (1965). A Catholic nun who helped develop BASIC, she believed computers should be accessible to everyone, not just mathematicians and engineers. She founded the computer science department at Clarke College and spent her career making computing education available to all.
 
@@ -341,7 +341,7 @@ This work stands on the shoulders of giants—many of whom history has overlooke
 
 **The Open Source Community**, whose ethos of sharing knowledge freely echoes the collaborative spirit of early computing, when scientists shared code on punch cards and progress mattered more than profit.
 
-We release this work in that same spirit. The ideas here are not ours alone—they belong to everyone who dared to imagine that computers could work differently.
+We release this work in that same spirit. The ideas here are not ours alone. They belong to everyone who dared to imagine that computers could work differently.
 
 ---
 

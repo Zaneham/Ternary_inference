@@ -184,11 +184,11 @@ Contributions welcome! Ideas:
 
 ## Acknowledgements
 
-This work stands on the shoulders of giants—many of whom history has overlooked.
+This work stands on the shoulders of giants, many of whom history has overlooked.
 
 **Nikolay Brusentsov** and the Setun development team at Moscow State University, whose balanced ternary computer (1958) proved that alternative computational paradigms could outperform binary in reliability and elegance.
 
-**Kateryna Yushchenko** (1919-2001), Ukrainian computer scientist who invented pointers in 1955—nine years before they were "discovered" in the West.
+**Kateryna Yushchenko** (1919-2001), Ukrainian computer scientist who invented pointers in 1955, nine years before they were "discovered" in the West.
 
 **Grace Hopper** (1906-1992), who invented the first compiler and proved that computers could be programmed in human-readable languages.
 
