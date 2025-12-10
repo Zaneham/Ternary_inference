@@ -8,31 +8,31 @@ December 2025
 
 ## Abstract
 
-We present a quantization method for transformer-based language models that constrains weights to balanced ternary values {-1, 0, +1}, eliminating floating-point matrix multiplication entirely. This approach, derived from Brusentsov's balanced ternary research at Moscow State University (1958-1965), replaces multiply-accumulate operations with addition, subtraction, and skip operations.
+I present a quantisation method for transformer-based language models that constrains weights to balanced ternary values {-1, 0, +1}, eliminating floating-point matrix multiplication entirely. This approach, derived from Brusentsov's balanced ternary research at Moscow State University (1958-1965), replaces multiply-accumulate operations with addition, subtraction, and skip operations.
 
-Applied to transformer architectures ranging from 1B to 120B parameters, we demonstrate:
+Applied to transformer architectures ranging from 1B to 120B parameters, I demonstrate:
 
 - 93.8% reduction in energy consumption per inference
-- 16x memory compression (28GB → 1.75GB for 7B parameters)
+- 16x memory compression (28GB to 1.75GB for 7B parameters)
 - 48x theoretical throughput improvement
 - 87-92% signal preservation compared to float32 baselines
 - 67% operational sparsity (zero-weight skip)
 
 All benchmarks pass for mathematical equivalence, numerical stability, output diversity, and reproducibility. The method requires no specialised hardware. Standard CPUs can execute the addition/subtraction operations efficiently.
 
-We open-source the full implementation and argue that the AI industry's dependence on GPU-based matrix multiplication represents a local optimum obscuring more efficient computational paradigms known since 1965.
+I open-source the full implementation and argue that the AI industry's dependence on GPU-based matrix multiplication represents a local optimum obscuring more efficient computational paradigms known since 1965.
 
 ---
 
 ## 1. Introduction
 
-The dominant paradigm in neural network computation relies on dense matrix multiplication using floating-point arithmetic. Modern large language models (LLMs) such as GPT-4, Claude, and LLaMA require billions of multiply-accumulate (MAC) operations per token, consuming significant energy and requiring specialized GPU hardware.
+The dominant paradigm in neural network computation relies on dense matrix multiplication using floating-point arithmetic. Modern large language models (LLMs) such as GPT-4, Claude, and LLaMA require billions of multiply-accumulate (MAC) operations per token, consuming significant energy and requiring specialised GPU hardware.
 
-We challenge this paradigm by demonstrating that transformer inference can be performed using only addition and subtraction operations, with no multiplication whatsoever.
+I challenge this paradigm by demonstrating that transformer inference can be performed using only addition and subtraction operations, with no multiplication whatsoever.
 
 ### 1.1 The Core Insight
 
-Consider a linear layer computing y = xW where W is a weight matrix. In standard implementations, this requires O(n²) floating-point multiplications. However, if we constrain W to ternary values {-1, 0, +1}, the computation becomes:
+Consider a linear layer computing y = xW where W is a weight matrix. In standard implementations, this requires O(n squared) floating-point multiplications. However, if we constrain W to ternary values {-1, 0, +1}, the computation becomes:
 
 - W[i,j] = +1: Add x[i] to y[j]
 - W[i,j] = -1: Subtract x[i] from y[j]
@@ -49,7 +49,7 @@ The balanced ternary number system, using digits {-1, 0, +1} (often written as {
 - Simplified rounding (truncation equals rounding)
 - No separate sign bit required
 
-Our work applies these 60-year-old insights to modern transformer architectures.
+This work applies these 60-year-old insights to modern transformer architectures.
 
 ---
 
@@ -63,17 +63,17 @@ The transformer architecture (Vaswani et al., 2017) consists of:
 2. **MLP layers**: Two linear projections with non-linear activation
 3. **Layer normalisation**: Stabilises training and inference
 
-Each component relies heavily on matrix multiplication, which we replace with ternary operations.
+Each component relies heavily on matrix multiplication, which I replace with ternary operations.
 
-### 2.2 Weight Quantization
+### 2.2 Weight Quantisation
 
-Previous work on neural network quantization includes:
+Previous work on neural network quantisation includes:
 
 - **Binary Neural Networks** (Courbariaux et al., 2016): Weights in {-1, +1}
 - **Ternary Weight Networks** (Li et al., 2016): Weights in {-1, 0, +1}
 - **XNOR-Net** (Rastegari et al., 2016): Binary weights and activations
 
-Our contribution extends ternary quantization to full transformer architectures with comprehensive benchmarking.
+My contribution extends ternary quantisation to full transformer architectures with comprehensive benchmarking.
 
 ### 2.3 Balanced Ternary Arithmetic
 
@@ -85,22 +85,22 @@ In balanced ternary, each "trit" can represent three values:
 | 0 | 0 |
 | 1 | +1 |
 
-A number is represented as: n = Σ(tᵢ × 3ⁱ)
+A number is represented as: n = sum of (t_i times 3^i)
 
-For example: 13₁₀ = 111₃ = 1×9 + 1×3 + 1×1
+For example: 13 in decimal = 111 in balanced ternary = 1x9 + 1x3 + 1x1
 
 The key insight for neural networks: multiplication by a trit becomes a simple operation:
-- ×1 = identity
-- ×0 = zero
-- ×(-1) = negation
+- x1 = identity
+- x0 = zero
+- x(-1) = negation
 
 ---
 
 ## 3. Method
 
-### 3.1 Weight Quantization
+### 3.1 Weight Quantisation
 
-Given a pre-trained weight matrix W ∈ ℝ^(m×n), we quantize to ternary values:
+Given a pre-trained weight matrix W in R^(m x n), I quantise to ternary values:
 
 ```
 W_ternary[i,j] = +1  if W[i,j] > threshold
@@ -108,7 +108,7 @@ W_ternary[i,j] = +1  if W[i,j] > threshold
                =  0  otherwise
 ```
 
-We use the 33rd percentile of |W| as the threshold, resulting in approximately 67% sparsity (zeros).
+I use the 33rd percentile of |W| as the threshold, resulting in approximately 67% sparsity (zeros).
 
 ### 3.2 Ternary Matrix Multiplication
 
@@ -140,7 +140,7 @@ def ternary_forward_explicit(x, W_ternary):
 
 ### 3.3 Attention Mechanism
 
-For attention, we apply ternary quantization to Q, K, V, and output projections. The attention score computation (Q @ K^T) remains in floating-point, but all linear projections are ternary.
+For attention, I apply ternary quantisation to Q, K, V, and output projections. The attention score computation (Q @ K^T) remains in floating-point, but all linear projections are ternary.
 
 ### 3.4 Memory Representation
 
@@ -153,7 +153,7 @@ Ternary weights can be stored in 2 bits per weight:
 | 10 | -1 |
 | 11 | (unused) |
 
-This achieves 16x compression compared to float32 (32 bits → 2 bits).
+This achieves 16x compression compared to float32 (32 bits to 2 bits).
 
 ---
 
@@ -161,7 +161,7 @@ This achieves 16x compression compared to float32 (32 bits → 2 bits).
 
 ### 4.1 Experimental Setup
 
-We implemented a complete ternary transformer in Python/NumPy with the following configurations:
+I implemented a complete ternary transformer in Python/NumPy with the following configurations:
 
 | Model | Hidden | Heads | Layers | Parameters |
 |-------|--------|-------|--------|------------|
@@ -174,18 +174,18 @@ We implemented a complete ternary transformer in Python/NumPy with the following
 
 #### 4.2.1 Mathematical Equivalence
 
-We verified that ternary matrix multiplication produces identical results to standard multiplication with ternary weights:
+I verified that ternary matrix multiplication produces identical results to standard multiplication with ternary weights:
 
 | Size | Max Error | Status |
 |------|-----------|--------|
-| 64×64 | 1.43e-06 | ✅ PASS |
-| 256×256 | 7.63e-06 | ✅ PASS |
-| 1024×1024 | 2.86e-05 | ✅ PASS |
-| 4096×4096 | 1.68e-04 | ✅ PASS |
+| 64x64 | 1.43e-06 | PASS |
+| 256x256 | 7.63e-06 | PASS |
+| 1024x1024 | 2.86e-05 | PASS |
+| 4096x4096 | 1.68e-04 | PASS |
 
 #### 4.2.2 Signal Preservation
 
-Quantizing float32 weights to ternary preserves 87-92% of the signal:
+Quantising float32 weights to ternary preserves 87-92% of the signal:
 
 | Threshold | Sparsity | Correlation |
 |-----------|----------|-------------|
@@ -197,9 +197,9 @@ Quantizing float32 weights to ternary preserves 87-92% of the signal:
 
 The ternary transformer generates diverse, non-degenerate outputs:
 
-- Deterministic: Same seed produces same output ✅
-- Diverse: Different seeds produce different outputs ✅
-- Non-degenerate: 59% unique tokens in generated sequences ✅
+- Deterministic: Same seed produces same output (PASS)
+- Diverse: Different seeds produce different outputs (PASS)
+- Non-degenerate: 59% unique tokens in generated sequences (PASS)
 
 #### 4.2.4 Numerical Stability
 
@@ -207,13 +207,13 @@ The model handles extreme inputs without NaN or Inf:
 
 | Input Scale | Status |
 |-------------|--------|
-| 1e-10 | ✅ Stable |
-| 1.0 | ✅ Stable |
-| 1e+10 | ✅ Stable |
+| 1e-10 | Stable |
+| 1.0 | Stable |
+| 1e+10 | Stable |
 
 ### 4.3 Hardware Simulation
 
-We simulated the energy and throughput implications:
+I simulated the energy and throughput implications:
 
 #### Energy Consumption (per inference, 7B model)
 
@@ -255,7 +255,7 @@ This is the root cause of hallucination. It is not a bug to be fixed with better
 
 Balanced ternary offers something binary neural networks cannot: a native representation of "no information."
 
-In our quantisation scheme, 67% of all weights become zero. These zeros are not merely an efficiency optimisation. They are the model literally encoding: "I have no learned connection between these neurons. I have no information to contribute here."
+In my quantisation scheme, 67% of all weights become zero. These zeros are not merely an efficiency optimisation. They are the model literally encoding: "I have no learned connection between these neurons. I have no information to contribute here."
 
 Consider what this means at the weight level:
 
@@ -267,7 +267,7 @@ When a query activates pathways dominated by zero weights, the model is revealin
 
 ### 5.3 Epistemic Ternary: A Three-Valued Logic for AI
 
-We propose extending this insight to the output layer through what we call Epistemic Ternary outputs. Rather than forcing a probability distribution over vocabulary tokens, we introduce three semantic channels:
+I propose extending this insight to the output layer through what I call Epistemic Ternary outputs. Rather than forcing a probability distribution over vocabulary tokens, I introduce three semantic channels:
 
 | Channel | Meaning | Action |
 |---------|---------|--------|
@@ -305,7 +305,7 @@ The implications extend beyond preventing embarrassing chatbot errors.
 
 ### 5.5 Experimental Validation
 
-We tested the epistemic output layer on questions designed to elicit hallucination:
+I tested the epistemic output layer on questions designed to elicit hallucination:
 
 | Test Category | Description | Abstention Rate |
 |---------------|-------------|-----------------|
@@ -335,7 +335,7 @@ This may prove more important than the energy savings.
 
 ### 6.1 Implications
 
-Our results suggest that the AI industry's focus on GPU-based floating-point matrix multiplication may represent a local optimum. Balanced ternary arithmetic, known since 1958, offers:
+These results suggest that the AI industry's focus on GPU-based floating-point matrix multiplication may represent a local optimum. Balanced ternary arithmetic, known since 1958, offers:
 
 1. **Simpler hardware**: Addition/subtraction units are smaller than multipliers
 2. **Lower energy**: No floating-point multiplication overhead
@@ -352,14 +352,14 @@ Our results suggest that the AI industry's focus on GPU-based floating-point mat
 
 - Custom SIMD kernels for ternary operations
 - Hardware implementations (FPGA, ASIC)
-- Training-aware quantization
+- Training-aware quantisation
 - Integration with existing frameworks (PyTorch, JAX)
 
 ---
 
 ## 7. Conclusion
 
-We have demonstrated that transformer inference can be performed using only addition and subtraction operations, eliminating floating-point multiplication entirely. Our ternary quantization achieves:
+I have demonstrated that transformer inference can be performed using only addition and subtraction operations, eliminating floating-point multiplication entirely. The ternary quantisation achieves:
 
 - 93.8% energy reduction
 - 16x memory compression
@@ -370,7 +370,7 @@ All benchmarks pass for mathematical equivalence, numerical stability, and outpu
 
 The balanced ternary number system, developed by Brusentsov in 1958, offers a fundamentally different approach to neural network computation, one that the AI industry has overlooked for 60 years.
 
-We release our implementation as open source and invite the community to explore this alternative computational paradigm.
+I release this implementation as open source and invite the community to explore this alternative computational paradigm.
 
 ---
 
@@ -386,25 +386,29 @@ We release our implementation as open source and invite the community to explore
 
 5. Rastegari, M., et al. (2016). "XNOR-Net: ImageNet Classification Using Binary Convolutional Neural Networks." ECCV.
 
+6. Lukasiewicz, J. (1920). "On Three-Valued Logic." Ruch Filozoficzny.
+
+7. Kleene, S. C. (1938). "On Notation for Ordinal Numbers." Journal of Symbolic Logic.
+
 ---
 
-## Acknowledgments
+## Acknowledgements
 
-This work stands on the shoulders of giants, many of whom history has overlooked.
+I acknowledge the following pioneers whose work made this research possible:
 
 **Nikolay Brusentsov** and the Setun development team at Moscow State University, whose balanced ternary computer (1958) proved that alternative computational paradigms could outperform binary in reliability and elegance. The Setun ran for 17 years while its Western counterparts required constant maintenance.
 
-**Kateryna Yushchenko** (1919-2001), Ukrainian computer scientist who invented pointers (indirect addressing) in 1955, nine years before they were "discovered" in the West. Her Address Programming Language was used across the Soviet Union for ballistic calculations and space exploration. Expelled from university as a "daughter of enemies of the people," she persevered to become the first woman in the USSR to receive a PhD in programming.
+**Kateryna Yushchenko** (1919-2001), Ukrainian computer scientist who invented pointers (indirect addressing) in 1955, nine years before they were "discovered" in the West. Her Address Programming Language was used across the Soviet Union for ballistic calculations and space exploration.
 
-**Grace Hopper** (1906-1992), who invented the first compiler and proved that computers could be programmed in human-readable languages. Her work on COBOL democratised programming and her philosophy ("It's easier to ask forgiveness than permission") drives innovation to this day.
+**Grace Hopper** (1906-1992), who invented the first compiler and proved that computers could be programmed in human-readable languages.
 
-**Sister Mary Kenneth Keller** (1913-1985), the first woman in America to earn a PhD in Computer Science (1965). A Catholic nun who helped develop BASIC, she believed computers should be accessible to everyone, not just mathematicians and engineers. She founded the computer science department at Clarke College and spent her career making computing education available to all.
+**Sister Mary Kenneth Keller** (1913-1985), the first woman in America to earn a PhD in Computer Science (1965). A Catholic nun who helped develop BASIC, she believed computers should be accessible to everyone.
 
-**The Archivists and Historians** who preserved the technical documentation, photographs, and memories of these pioneers. Without the tireless work of institutions like the Computer History Museum, the Charles Babbage Institute, and countless university archives, this knowledge would have been lost. Special recognition to those who translated Soviet-era technical papers and maintained access to research that political barriers might have buried.
+**The archivists and historians** who preserved the technical documentation, photographs, and memories of these pioneers. Without institutions like the Computer History Museum and the Charles Babbage Institute, this knowledge would have been lost.
 
-**The Open Source Community**, whose ethos of sharing knowledge freely echoes the collaborative spirit of early computing, when scientists shared code on punch cards and progress mattered more than profit.
+**The open source community**, whose ethos of sharing knowledge freely echoes the collaborative spirit of early computing.
 
-We release this work in that same spirit. The ideas here are not ours alone. They belong to everyone who dared to imagine that computers could work differently.
+I release this work in that same spirit.
 
 ---
 
@@ -414,4 +418,4 @@ Full implementation available at: https://github.com/Zaneham/Ternary_inference
 
 ---
 
-*Correspondence: Zane Hambly,*
+*Correspondence: Zane Hambly*
