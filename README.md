@@ -4,6 +4,7 @@
 
 A transformer inference engine using **balanced ternary weights {-1, 0, +1}** that eliminates floating-point multiplication entirely.
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17875182.svg)](https://doi.org/10.5281/zenodo.17875182)
 [![Benchmarks](https://img.shields.io/badge/benchmarks-passing-brightgreen)]()
 [![License](https://img.shields.io/badge/license-MIT-blue)]()
 
@@ -39,7 +40,7 @@ Ternary networks: `W ∈ {-1, 0, +1}` means:
 
 ```bash
 git clone https://github.com/Zaneham/Ternary_inference.git
-cd ternary-inference
+cd Ternary_inference
 pip install numpy
 ```
 
@@ -160,6 +161,7 @@ The Setun computer, using balanced ternary, operated successfully for over 17 ye
   author = {Hambly, Zane},
   title = {Ternary Inference: Zero-Multiplication Transformer Inference},
   year = {2025},
+  doi = {10.5281/zenodo.17875182},
   url = {https://github.com/Zaneham/Ternary_inference}
 }
 ```
