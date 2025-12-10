@@ -38,7 +38,7 @@ Ternary networks: `W ∈ {-1, 0, +1}` means:
 ## Installation
 
 ```bash
-git clone https://github.com/Zaneham/ternary-inference.git
+git clone https://github.com/Zaneham/Ternary_inference.git
 cd ternary-inference
 pip install numpy
 ```
@@ -160,7 +160,7 @@ The Setun computer, using balanced ternary, operated successfully for over 17 ye
   author = {Hambly, Zane},
   title = {Ternary Inference: Zero-Multiplication Transformer Inference},
   year = {2025},
-  url = {https://github.com/Zaneham/ternary-inference}
+  url = {https://github.com/Zaneham/Ternary_inference}
 }
 ```
 

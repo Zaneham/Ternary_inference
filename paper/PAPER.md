@@ -347,7 +347,7 @@ We release this work in that same spirit. The ideas here are not ours alone. The
 
 ## Code Availability
 
-Full implementation available at: https://github.com/Zaneham/ternary-inference
+Full implementation available at: https://github.com/Zaneham/Ternary_inference
 
 ---
 

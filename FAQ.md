@@ -117,7 +117,7 @@ Because we're literally getting compute for free. 67% of all operations are skip
 ### How do I install it?
 
 ```bash
-git clone https://github.com/Zaneham/ternary-inference.git
+git clone https://github.com/Zaneham/Ternary_inference.git
 cd ternary-inference
 pip install numpy
 ```
@@ -150,7 +150,7 @@ Python 3.8+ should work. We use NumPy for matrix operations.
 
 ### Where do I report bugs?
 
-Open an issue on GitHub: https://github.com/Zaneham/ternary-inference/issues
+Open an issue on GitHub: https://github.com/Zaneham/Ternary_inference/issues
 
 ---
 
