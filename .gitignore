@@ -5,3 +5,6 @@ output/
 paper/
 __pycache__/
 *.pyc
+debug_*.py
+*.pyd
+*.so
