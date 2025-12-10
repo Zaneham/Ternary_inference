@@ -52,7 +52,7 @@ def benchmark_matmul():
             _ = x @ w_float
         float_time = (time.perf_counter() - start) / iterations * 1000
         
-        # Benchmark ternary (optimized)
+        # Benchmark ternary (optimised)
         start = time.perf_counter()
         for _ in range(iterations):
             _ = layer.forward(x)

@@ -61,7 +61,7 @@ The transformer architecture (Vaswani et al., 2017) consists of:
 
 1. **Attention layers**: Q, K, V projections followed by scaled dot-product attention
 2. **MLP layers**: Two linear projections with non-linear activation
-3. **Layer normalization**: Stabilizes training and inference
+3. **Layer normalisation**: Stabilises training and inference
 
 Each component relies heavily on matrix multiplication, which we replace with ternary operations.
 

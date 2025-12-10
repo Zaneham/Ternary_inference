@@ -5,7 +5,20 @@ TERNARY TRANSFORMER
 A complete transformer implementation using only ternary weights.
 All matrix multiplications become additions and subtractions.
 
-Zane - The Ian Index
+This module implements a transformer architecture where all linear layer
+weights are constrained to balanced ternary values {-1, 0, +1}. This
+eliminates floating-point multiplication entirely, replacing it with
+addition, subtraction, and skip operations.
+
+Key components:
+    - TernaryLinear: Linear layer with ternary weights
+    - TernaryAttention: Multi-head attention with ternary projections
+    - TernaryMLP: Feed-forward network with ternary weights
+    - TernaryTransformer: Complete transformer model
+
+Based on Brusentsov's balanced ternary research (Moscow State University, 1958).
+
+Author: Zane Hambly
 """
 
 import numpy as np
