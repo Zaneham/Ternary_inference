@@ -8,3 +8,7 @@ __pycache__/
 debug_*.py
 *.pyd
 *.so
+
+# Rust build artifacts
+ternary-core/target/
+Cargo.lock
